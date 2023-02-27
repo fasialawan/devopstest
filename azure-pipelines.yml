@@ -12,7 +12,7 @@ trigger:
   - main
 
 pool:
-  - Uipath_local
+  - AZVM
 
 steps:
 - script: echo Hello, world!
