@@ -12,7 +12,7 @@ trigger:
 - main
 
 pool:
-  Uipath_local
+ - Uipath_local
 
 steps:
 - script: echo Hello, world!
