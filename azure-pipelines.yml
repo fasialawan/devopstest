@@ -1,6 +1,4 @@
 # Starter pipeline
-
-
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -9,28 +7,31 @@ trigger:
   - main
 
 pool:
-  - Uipath-Dev
+  name: Uipath-Dev
 
+steps:
 - task: UiPathPack@3
   inputs:
     versionType: 'AutoVersion'
-    projectJsonPath: '$(Build.SourcesDirectory)\project.json'
+    projectJsonPath: '$(Build.SourcesDirectory)/project.json'
     orchestratorConnection: 'UipathDev'
-    outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+    outputPath: '$(Build.ArtifactStagingDirectory)/Output'
+
 - task: UiPathDeploy@3
   inputs:
     orchestratorConnection: 'UipathDev'
-    packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
+    packagesPath: '$(Build.ArtifactStagingDirectory)/Output'
     folderName: 'Shared'
+
 - task: UiPathTest@3
   inputs:
     testTarget: 'TestProject'
     orchestratorConnection: 'UipathDev'
-    testProjectPath: '$(Build.ArtifactStagingDirectory)\Output'
+    testProjectPath: '$(Build.ArtifactStagingDirectory)/Output'
     folderName: 'Shared'
-        
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
