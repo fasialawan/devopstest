@@ -12,11 +12,26 @@ trigger:
   - main
 
 pool:
-  - AZVM
+  - Uipath-Dev
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: UiPathPack@3
+  inputs:
+    versionType: 'AutoVersion'
+    projectJsonPath: '$(Build.SourcesDirectory)\project.json'
+    orchestratorConnection: 'UipathDev'
+    outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+    - task: UiPathDeploy@3
+      inputs:
+        orchestratorConnection: 'UipathDev'
+        packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
+        folderName: 'Shared'
+        - task: UiPathTest@3
+          inputs:
+            testTarget: 'TestProject'
+            orchestratorConnection: 'UipathDev'
+            testProjectPath: '$(Build.ArtifactStagingDirectory)\Output'
+            folderName: 'Shared'
+        
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
