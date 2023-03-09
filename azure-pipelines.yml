@@ -17,11 +17,11 @@ steps:
     orchestratorConnection: 'UipathDev'
     outputPath: '$(Build.ArtifactStagingDirectory)/Output'
 
-- task: UiPathDeploy@3
+- task: NuGetCommand@2
   inputs:
-    orchestratorConnection: 'UipathDev'
-    packagesPath: '$(Build.ArtifactStagingDirectory)/Output'
-    folderName: 'Shared'
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
 
 - task: UiPathTest@3
   inputs:
