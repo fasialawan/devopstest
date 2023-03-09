@@ -20,17 +20,17 @@ pool:
     projectJsonPath: '$(Build.SourcesDirectory)\project.json'
     orchestratorConnection: 'UipathDev'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
-    - task: UiPathDeploy@3
-      inputs:
-        orchestratorConnection: 'UipathDev'
-        packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
-        folderName: 'Shared'
-        - task: UiPathTest@3
-          inputs:
-            testTarget: 'TestProject'
-            orchestratorConnection: 'UipathDev'
-            testProjectPath: '$(Build.ArtifactStagingDirectory)\Output'
-            folderName: 'Shared'
+- task: UiPathDeploy@3
+  inputs:
+    orchestratorConnection: 'UipathDev'
+    packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
+    folderName: 'Shared'
+- task: UiPathTest@3
+  inputs:
+    testTarget: 'TestProject'
+    orchestratorConnection: 'UipathDev'
+    testProjectPath: '$(Build.ArtifactStagingDirectory)\Output'
+    folderName: 'Shared'
         
 
 - script: |
