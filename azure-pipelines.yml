@@ -27,6 +27,6 @@ steps:
   inputs:
     testTarget: 'TestProject'
     orchestratorConnection: 'UipathDev'
-    testProjectPath: '$(Build.ArtifactStagingDirectory)/Output'
+    testProjectPath: '$(Build.ArtifactStagingDirectory)/project.json'
     folderName: 'Shared'
 
